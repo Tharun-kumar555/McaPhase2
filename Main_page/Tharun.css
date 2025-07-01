@@ -1,0 +1,108 @@
+ #tharun{
+            font-size: 50px;
+            color: red;
+            margin-left: 41%;
+            text-shadow: 0px 0px 0px 10px rgb(255, 255, 255);
+        }
+#tharun:hover{
+            color: rgb(255, 255, 255);
+        }
+ /* #all{
+            font-size: 25px;
+        }
+#all:hover{
+            color: red;
+        }
+         */
+#tharunimg{
+           height: 400px;
+            width: 400px;
+            /* margin-left: 25%; */
+
+        }
+#nav{
+            color: white;
+            background-color: rgb(54, 64, 64);
+        }
+/* #motheriimg{
+             background-color: rgb(60, 57, 57);
+        } */
+#navtext{
+            display: inline;
+        }
+#fix{
+    display: flex;
+    justify-content: space-evenly;
+}
+#srik{
+    /* margin-top: 35px; */
+}
+.tb{
+    /* margin-left: 430px; */
+    /* margin-bottom: 300px; */
+    /* padding-right:500px; */
+    display: flex;
+    justify-content: space-evenly;
+}
+.rightimg{
+            /* align-items: right; */
+            width: 200px;
+            height: 200px;
+            /* margin-left: 2410px; */
+            /* margin-top: 0px; */
+             
+        }
+        
+       #tr1{
+        font-size: 40px;
+       }
+       #tr2{
+        font-size: 25px;
+       }
+       #ss{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+       }
+
+
+       #content{
+            font-size: 30px;
+            color: rgb(191, 136, 136);
+            /* margin-left: 150px; */
+            /* margin-right: 50%;  */
+        }
+        #cl{
+        color: white;
+       }
+          .btn{
+            color: rgb(226, 43, 43);
+            padding: 10px;
+            border-radius: 9px;
+            background-color: rgb(0, 0, 0);
+            border-color: white;
+            margin-left: 22%;
+            margin-top: 5px;
+            margin-right: 1000px;
+            
+                }
+
+        .btn:hover{
+            color: rgb(255, 255, 255);
+            background-color: black;
+        }
+         .mrq{
+            margin-left: 500px;
+            margin-right: 500px;
+            font-size: 40px;
+            margin-bottom: 100px;
+            background-color: rgb(227, 196, 196);
+            border-radius: 15px;          
+        }
+       .mrq p{
+        color: black;
+       }
+       #ss{
+        background-color: rgb(66, 62, 57);
+        border-radius: 20%;
+       }

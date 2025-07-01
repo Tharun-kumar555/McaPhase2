@@ -1,0 +1,67 @@
+ .h1{
+    color: red;
+    background-color: yellowgreen;
+    padding-left: 100px;
+    border-radius: 20px;
+    padding-right: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+
+    /*
+.h2{
+    background-color: yellowgreen;
+    padding-left:150px;
+    margin-right: 400px;
+    margin-left: 400px;
+}
+
+.h3{
+    background-color: yellowgreen;
+    padding-left:585px;
+    padding-left:180px;
+    margin-right: 400px;
+    margin-left: 400px;
+}
+/*
+.h4{
+    background-color: yellowgreen;
+    /* padding-left:605px; */
+    /* padding-left:200px;
+    margin-right: 400px;
+    margin-left: 400px; 
+}
+/* .h5{
+    background-color: yellowgreen;
+    /* padding-left:605px; */
+    /* padding-left:220px;
+    margin-right: 400px;
+    margin-left: 400px;
+} */
+
+/*
+.h6{
+    background-color: yellowgreen;
+    /* padding-left:605px; */
+    /* padding-left:240px;
+    margin-right: 400px;
+    margin-left: 400px;
+} */
+/* #nav{ 
+     background-color: rgb(232, 188, 188);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 2rem;
+    padding-left: 50px;
+    border-radius: 10px;
+    grid-template-columns: 50px 50px;
+    column-gap: 100px;
+
+    
+}  */
+/* #me{
+    margin-left: 1000px;
+    margin-top: 15px;
+} */  
