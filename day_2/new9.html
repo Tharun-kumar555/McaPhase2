@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            background-color: rgb(231, 137, 102);
+            border-radius: 5px;
+        }
+        #bg{
+            /* display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly; */
+            /* margin: 0px 1400px 0px 1400px; */
+            margin-left:600px;
+            margin-right: 600px;
+            margin-top: 200px; 
+            border-radius: 20px;
+            padding: 60px;
+            background-color: aqua;
+        
+        }
+        #bg:hover{
+            background-color: red;
+            color: black;
+            transition: 3s;
+        }
+        label{
+            border-radius: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="bg">
+    <div >
+        <h2>Login</h2>
+        <form action="/submit-login" method="POST">
+            <div>
+                <label for="username" style="color: brown;">Username</label> <br>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+
+            </div>
+            <div>
+                <label for="password" style="color: brown;">password</label><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required><br>    
+            </div>
+       
+    </div>
+    <div>
+    <div>
+          <br><button type="submit">Login</button><br>
+   
+    </div>
+    <div>
+       <br><input type="checkbox" id="remember" name="remember">
+        <label for="remember" style="color: rgb(75, 122, 216);">Remember me</label><br> <br>
+        <div><a href="#">Forget password?</a></div>
+    </div>
+    </div>
+    </div>
+    
+    <br>
+
+ </form>
+</body>
+</html>
