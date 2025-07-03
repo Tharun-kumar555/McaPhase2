@@ -1,0 +1,60 @@
+<!-- only large and small digita are working -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function Largedigits(){
+            var num=parseInt(document.getElementById("txtnumber").value);
+            ld=0;
+            while(num>0){
+                rem=num%10;
+                if(rem>ld)ld=rem;
+                num=Math.floor(num/10);
+
+            }
+            document.getElementById("txtans").value=ld;
+
+        }
+         function smalldigits(){
+            var num=parseInt(document.getElementById("txtnumber").value);
+            ld=9;
+            while(num>0){ 
+                rem=num%10;
+                if(rem<ld)ld=rem;
+                num=Math.floor(num/10);
+
+            }
+            document.getElementById("txtans").value=ld;
+
+        }
+         function sumdigits(){
+            var num=parseInt(document.getElementById("txtnumber").value);
+        
+            while(num>0){ 
+               
+                rem=num%10;
+                
+                ld+=0
+                num=Math.floor(num/10);
+
+            }
+            document.getElementById("txtans").value=ld;
+
+        }
+
+    </script>
+</head>
+<body>
+    <p>Enter a number: <input  name="" id="txtnumber"></p>
+    <button onclick="Largedigits()">Large Digits</button>
+    <button onclick="sumdigits()">Sum Digits</button>
+    
+    <button onclick="smalldigits()">Small Digits</button>
+    <button onclick="revdigits()">Reverse Digits</button>
+    <p>sum of number: <input  name="" id="txtans"></p>
+    
+</body>
+</html>

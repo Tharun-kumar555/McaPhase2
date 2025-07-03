@@ -1,0 +1,29 @@
+
+<!-- Code not working -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jsd1_2.js">
+        function printTable()
+    {
+    var number=parseInt(document.getElementById('txtNumber').value);
+    var i=0;
+    for( i=0 ; i<=10 ; i++)
+        {
+            document.write(`${number} * ${i} = ${num*i }` );
+            document.write('<br/>');
+            
+        }
+}
+    </script>
+</head>
+<body>
+    <p>enter a number : <input id="txtNumber"></p>
+    <button onclick="printTable()">Print the table
+    </button>
+</body>
+</html>
