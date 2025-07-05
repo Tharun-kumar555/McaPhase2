@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function pT(){
+            var num=parseInt(document.getElementById("txtNumber").value);
+            var i=0;
+            temp=0/*if you put i in the place of temp in below you can remove the temp on this line */
+            for(i=0;i<=10;i++){
+                
+                document.write(num+"*"+temp/*i*/+"="+num*i);
+                temp++
+                document.write("<br/>")
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>Enter a number: <input type="text" id="txtNumber"> </p>
+    <button onclick="pT()">Print Table</button>
+</body>
+</html>

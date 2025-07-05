@@ -1,0 +1,35 @@
+
+<!-- Not undersatnded -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function myFunction(){
+            //Get the value of input field with id="numb"
+            let x=parseInt(document.getElementById("numb").value)
+            //if x is not a number or less then one or more grater then 10
+            let text;
+            if( isNaN(x) || x < 5 || x > 10){
+                text="Input is not  valid.";
+            }
+            else{
+                text="Input is valid.";
+            }
+            document.getElementById('demo').innerHTML = text;
+        }
+    </script>
+</head>
+<body>
+    <h2>Java script validation</h2>
+    <p>
+        Pleace enter a number between 1 and 10:
+    </p>
+    <input type="text" name="" id="numb">
+    <button type="button" onclick="myFunction()">Submit</button>
+    <p id="demo"></p>
+</body>
+</html>

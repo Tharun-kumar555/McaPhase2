@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sub(){
+            let s=document.getElementsByTagName("input").value;
+            // document.getElementById("de").value=alert
+            
+            alert(+"Thank you for submiting your details..❤")
+            
+        }
+    </script>
+    <style>
+        .tot{
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            height: auto;
+            /* flex-wrap: wrap-reverse; */
+            text-align: left;
+            align-items: left;
+            /* padding-right: ; */
+            padding-left: 100px;
+            /* margin-top: 150px; */
+            margin-bottom: 100px;
+            /* margin-left: 300px; */
+            /* margin-right: 300px; */
+            /* position: fixed; */
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 40%;
+            border-radius: 20px;
+        }
+        .tot:hover b{
+            color: rgb(230, 0, 255);
+            
+            transition: 3s;
+        }
+        button{
+            margin-left:54px ;
+            margin: 10px;
+            margin-left: 0;
+        }
+        h1{
+            text-align: center;
+            font-size: xx-large;
+            /* margin-top:100px; */
+        }
+        input,textarea,button{
+            box-shadow: 0px 1px 10px 1px rgb(140, 121, 215);
+            
+        }
+        input:focus{
+            outline: none;
+            border-color: aqua;
+            box-shadow: 0px 2px 10px 2px rgb(185, 98, 217);
+
+        }
+     .i{
+        width: 90%;
+        height: 30px;
+        border-radius: 10px;
+     }
+     /* .tot:hover.p{
+        color:rgb(230, 0, 255) ;
+        transition: 3s;
+    
+
+     } */
+
+    </style>
+</head>
+<body style="background-color: green;">
+   <br> <div>
+        <h1>Feed back of training</h1>
+    </div><br>
+    <div class="tot">
+    
+    <div> <br><br><br>
+        <b>Trainer Name:</b> <br>
+        <input type="text" class="i"> <br><br>
+        <b>Collage Name: </b><br>
+        <input type="text" class="i"><br><br>
+       
+        <b>Department:</b> <br>
+        <input type="text" class="i"><br><br>
+       <b> Training Attended:</b> 
+        <select name="dropdown" id="" >
+            <option value="">--Select Training--</option>
+            <option value="">Python</option>
+            <option value="">Java</option>
+            <option value="">C</option>
+            <option value="">C++</option>
+            <option value="">AI</option>
+        </select>
+        
+        <br><br>
+        <b>Course:</b><br>
+        <input type="checkbox" name="" >Python <br>
+        <input type="checkbox" name="" >Html <br>
+        <input type="checkbox" name="" >Css <br>
+        <input type="checkbox" name="" >javascript <br>
+        <input type="checkbox" name="" >Django <br>
+        <input type="checkbox" name="" >Java<br>
+        <input type="checkbox" name="" >C++<br><br>
+        <b>Explanation:</b> <br>
+        <input type="radio"  name="submit" value="very good">Very Good <br>
+        <input type="radio"  name="submit" value="Good">Good <br>
+        <input type="radio"  name="submit" value="Average">Average <br>
+        <input type="radio"  name="submit" value="Bad">Bad<br>
+        <input type="radio"  name="submit" value="very Bad">Very Bad<br><br>
+        <b>Topics Covered</b><br>
+        <input type="radio" name="" value="">Html<br>
+        <input type="radio" name="" value="">Css<br>
+        <input type="radio" name="" value="">Bootstrap<br>
+        <input type="radio" name="" value="">Django<br>
+        <input type="radio" name="" value="">Java Script<br>
+        <input type="radio" name="" value="">Php<br>
+        <input type="radio" name="" value="">Adbms<br>
+
+        
+        Tarining Start Date: <br>
+        <input type="date" name="" id=""><br><br>
+        Tarining End Date: <br>
+        <input type="date" name="" id=""><br>
+        <br><textarea name="" id="" placeholder="Write anything here.."></textarea>
+        <br><button><b onclick="sub()">submit</b>
+        </button>
+
+       
+        
+        
+    </div></center>
+    </div>
+</body>
+</html>
