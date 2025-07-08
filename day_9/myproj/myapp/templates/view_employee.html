@@ -1,0 +1,31 @@
+{%   extends  "mtie.html"  %}
+{%  block content  %}
+<style>
+   table{margin-top: 100px;margin-left: 250px; }
+ </style>
+<h1>Your Student data here ...</h1>
+<table border="1">
+<tr style="font-size: 20px;">
+<th>Id</th>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Mobile</th>
+<th>Email</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+{%  for  x  in  data  %}
+<tr style="font-size: 16px;">
+<td>{{x.id}}</td>
+<td>{{x.first_name}}</td>
+<td>{{x.last_name}}</td>
+<td>{{x.mobile}}</td>
+<td>{{x.email}}</td>
+<td> Edit </td>
+<td>Delete</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+</form>
+ {% endblock %}
