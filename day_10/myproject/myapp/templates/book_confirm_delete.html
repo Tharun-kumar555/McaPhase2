@@ -1,0 +1,10 @@
+{%   extends  "master.html"  %}
+{% block title %}Confirm Delete{% endblock %}
+{%  block content  %}
+ <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>  
+ {% endblock %}
