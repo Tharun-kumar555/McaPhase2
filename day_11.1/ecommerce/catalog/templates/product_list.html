@@ -1,0 +1,29 @@
+{% load static  %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/pd.css' %}">
+    <title>Product Catalog</title>
+    <style>
+        img { width: 200px; height:150px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; }
+       .pro{
+   
+       }
+    </style>
+</head>
+<body>
+    <center> Mother Theresa Institutions </center>
+    <div class="pro">
+    {% for product in products %}
+        <div class="product">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
+            <p>${{ product.price }}</p>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
