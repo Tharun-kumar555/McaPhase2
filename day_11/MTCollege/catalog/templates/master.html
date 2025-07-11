@@ -1,0 +1,85 @@
+{% comment %} {% load static  %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/cs.css' %}">
+    <title>Product List</title>
+   
+    <style>
+        .im{ width: 200px; height:150px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; }
+       .imm{
+        height:100px; 
+       width;50px;
+       }
+    </style>
+</head>
+<body>
+<div >
+     <div id="nave">
+       <img class="imm" src="{% static 'img/Mother theresa.jpg' %}" class="imma">
+    
+    <div id="nav">
+       Mother Theresa Institute Canteen
+    </div></div>
+
+    <ul>
+
+  <li class="dropdown">
+    
+    <a href="javascript:void(0)" class="dropbtn">Home</a>
+    <div class="dropdown-content">
+      <a href="{ url 'product_detail' }">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </li>
+  <li class="dropdown">
+    <a href="#home" class="">About</a>
+    <div class="dropdown-content">
+      <a href="#">101</a>
+      <a href="#">102</a>
+      <a href="#">103</a>
+      <a href="#">104</a>
+      <a href="#">105</a>
+      <a href="#">106</a>
+    </div>
+</li>
+ <li class="dropdown">
+    <a href="/day_6/registration6_3.html" class="">Register</a>
+    <div class="dropdown-content">
+      <!-- <a href="#">101</a>
+      <a href="#">102</a>
+      <a href="#">103</a>
+      <a href="#">104</a>
+      <a href="#">105</a>
+      <a href="#">106</a> -->
+    </div>
+</li>
+  <li>
+
+    <li class="dropdown">
+    <a href="#home" class="">Admission</a>
+    <div class="dropdown-content">
+      <a href="#">201</a>
+      <a href="#">202</a>
+      <a href="#">203</a>
+      <a href="#">204</a>
+      <a href="#">205</a>
+      <a href="#">206</a>
+    </div>
+</li>
+
+
+
+<div><li><a href="/day_2/Login.html" class="log">Login</a></li></div>
+<div><li><a href="/day_5/Contact5_1.html" class="log">Contact Us</a></li></div>
+</ul>
+</div>
+</div>
+
+
+
+
+</body>
+</html> {% endcomment %}

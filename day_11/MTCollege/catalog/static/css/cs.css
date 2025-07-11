@@ -1,0 +1,160 @@
+ /* .product{
+     height 300px;
+    width 150px; 
+     displaygrid;
+     
+     display flex;
+    flex-direction column;
+}  
+   img{
+    display grid;
+    
+  } 
+   body{
+     padding 0; 
+    margin 7px;
+    background-color darkgrey;
+     }
+    .product{
+        box-shadow 0px 2px 2px 2px black;
+        background-color rgb(230, 223, 215);
+        border-radius 10px;
+         margin-left50px; 
+         display grid;
+        grid-column 16; 
+
+         column-gap 100px;
+        row-gap 100px;
+         
+    }
+  center{
+     height 100px; 
+    font-size xx-large;
+    padding20px 0px 10px 0px;
+    background-color rgb(177, 126, 199);
+    margin-top 0   ;
+  }
+  .product{
+     margin-top 100px;
+     
+     background-color rgb(200, 211, 232);
+      display grid;
+     grid-template-columns auto auto; 
+  }
+  .pro{
+     background-color rgb(167, 127, 135); 
+    margin-top 40px;
+  }
+  body {
+  background-colorwhite;
+  margin 0;
+  padding 0;
+  overflow hidden;
+}
+ul {
+  list-style-type none;
+  margin 0;
+  padding 0;
+  overflow hidden;
+  background-color #38444d;
+}
+
+.dropdown{
+  floatleft;
+}
+
+li a, .dropbtn {
+  display inline-block;
+  color white;
+  text-align center;
+  padding 14px 16px;
+  text-decoration none;
+}
+
+li ahover, .dropdownhover .dropbtn {
+  background-color red;
+}
+
+li.dropdown {
+  display inline-block;
+}
+
+.dropdown-content {
+  display none;
+  position absolute;
+  background-color #f9f9f9;
+  min-width 160px;
+  box-shadow 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index 1;
+}
+
+.dropdown-content a {
+  color black;
+  padding 12px 16px;
+  text-decoration none;
+  display block;
+  text-align left;
+}
+
+.dropdown-content ahover {background-color #f1f1f1;}
+
+.dropdownhover .dropdown-content {
+  display block;}
+ }
+.nav{
+  display flex;
+  width 100%;
+  justify-content space-between;
+} 
+ .im{
+  height 100px;
+  width 100px;
+} 
+#nav{
+  background-color bisque;
+  margin-right 400px;
+  padding-top 5px;
+  padding-bottom 0px;
+  font-size 40px;
+}
+#nave{
+  display flex;
+  justify-content space-between;
+  background-color bisque;
+   margin-top 0px; 
+  border-radius 5px;
+  box-shadow 0px 2px 2px 2px ;
+   height 200px; 
+   margin; 
+   bottom0; 
+  top 0;
+   position fixed; 
+  width 100%;
+  
+  }
+   .im{
+     height 80px;
+     width 80px;
+  }
+ .navtxt{
+  
+  padding-right 400px;
+  padding-left 100px;
+  
+  padding-top 5px;
+ 
+ }
+  .navv{
+  display flex;
+  width auto;
+  justify-contentspace-between;
+  background-color rgb(215, 166, 235);
+  flex-wrapwrap-reverse ;
+  height auto;
+
+ }  
+   .log{
+    float right;
+    color white;
+    list-style-type none;
+   } */

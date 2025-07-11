@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <style>
+       .di{
+        display:grid;
+        place-Items:center;
+           
+       }
+       body{
+        background-color:bisque;
+       }
+       h1{
+        font-size:50px;
+       }
+       p{
+        font-size:40px;
+       }
+       button{
+        text-decoration:none;
+       }
+    </style>
+</head>
+<body>
+    <div class="di">
+    <h1>{{ product.name }}</h1>
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+    <p>{{ product.description }}</p>
+    <p>Price: Rs{{ product.price }}</p>
+   <button> <a href="{ url 'product_list' }">Back to Items</a></button>
+    </div>
+</body>
+</html>
+</body>
+</html>

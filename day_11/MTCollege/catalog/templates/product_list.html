@@ -1,0 +1,93 @@
+{% load static  %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/pd.css' %}">
+    <title>Product List</title>
+   
+    <style>
+        .im{ width: 200px; height:150px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; }
+       .imm{
+        height:100px; 
+       width;50px;
+       }
+    </style>
+</head>
+<body>
+<div >
+     <div id="nave">
+       <img class="imm" src="{% static 'img/Mother theresa.jpg' %}" class="imma">
+    
+    <div id="nav">
+       Mother Theresa Institute Canteen
+    </div></div>
+
+    <ul>
+
+  <li class="dropdown">
+    
+    <a href="javascript:void(0)" class="dropbtn">Home</a>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </li>
+  <li class="dropdown">
+    <a href="#home" class="">Bekary</a>
+    <div class="dropdown-content">
+      <a href="#">101</a>
+      <a href="#">102</a>
+      <a href="#">103</a>
+      <a href="#">104</a>
+      <a href="#">105</a>
+      <a href="#">106</a>
+    </div>
+</li>
+ <li class="dropdown">
+    <a href="/day_6/registration6_3.html" class="">Canteen</a>
+    <div class="dropdown-content">
+      <!-- <a href="#">101</a>
+      <a href="#">102</a>
+      <a href="#">103</a>
+      <a href="#">104</a>
+      <a href="#">105</a>
+      <a href="#">106</a> -->
+    </div>
+</li>
+  <li>
+
+    <li class="dropdown">
+    <a href="#home" class="">Mess</a>
+    <div class="dropdown-content">
+      <a href="#">201</a>
+      <a href="#">202</a>
+      <a href="#">203</a>
+      <a href="#">204</a>
+      <a href="#">205</a>
+      <a href="#">206</a>
+    </div>
+</li>
+
+
+
+</ul>
+</div>
+</div>
+
+
+
+    <div class="pro">
+    {% for product in products %}
+        <div class="product">
+            {% if product.image %}
+                <img class="im" src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
+            <p>${{ product.price }}</p>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
