@@ -1,0 +1,82 @@
+Step-by-step smallest working example (tested)
+Make sure you copy it exactly as below to start.
+
+Step 1: Install
+
+pip install xhtml2pdf
+
+Step 2: Create views.py
+
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+def generate_pdf(request):
+    template = get_template('pdf_template.html')
+    html = template.render({'title': 'My PDF', 'message': 'Hello from Django PDF'})
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="report.pdf"'
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+from django.shortcuts import render
+def home(request):
+    return render(request, 'home.html')
+
+Step 3: urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('generate_pdf/', views.generate_pdf, name='generate_pdf'),
+]
+
+Step 4: Template with button
+templates/home.html
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Print Example</title>
+</head>
+<body>
+    <h1>PDF Print Example</h1>
+    <a href="{% url 'generate_pdf' %}" target="_blank">
+        <button>Print PDF</button>
+    </a>
+</body>
+</html>
+
+Step 5: PDF template
+templates/pdf_template.html
+
+Very important: keep this very simple (no external CSS or images):
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: navy; }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+</body>
+</html>
+
+Step 6: Run your server
+
+python manage.py runserver
+Go to http://127.0.0.1:8000/ → click Print PDF → PDF should open in a new tab.
