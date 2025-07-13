@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #st{
+            height: 400px;
+            width: 300px;
+            background-color: antiquewhite;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            /* margin-left: 400px; */
+            margin-top: 150px;
+            border-radius: 20px;
+            
+        }
+        body{
+            align-items: center;
+        }
+        #i{
+            border-radius: 5px;
+            padding: 5px;
+        }
+        #i:focus{
+            outline: none;
+            border: none;
+        }
+        button{
+            border-radius: 5px;
+            background-color: rgb(119, 119, 213);
+            padding: 7px;
+            color: white;
+        }
+        button a{
+            text-decoration: none;
+        }
+        button > a:hover{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <center><div id="st"><br><br>
+        Enter your resent password<br><br>
+        <input type="text" placeholder="resent password"  id="i" ><br><br>
+        Enter new password<br><br>
+        <input type="text" placeholder="new password"     id="i" ><br><br>
+        Cornfirm password<br><br>
+        <input type="text" placeholder="cornfirm password" id="i" ><br><br>
+        <button><a href="/day_2/Login.html">submit</a></button>
+
+    </div></center>
+</body>
+</html>
