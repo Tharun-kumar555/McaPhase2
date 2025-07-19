@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if items %}
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Qty</th>
+    <th>Subtotal</th>
+  </tr>
+  {% for entry in items %}
+  <tr>
+    <td>{{ entry.item.name }}</td>
+    <td>{{ entry.qty }}</td>
+    <td>₹{{ entry.subtotal }}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <td colspan="2"><strong>Total:</strong></td>
+    <td><strong>₹{{ total }}</strong></td>
+  </tr>
+</table>
+<a href="{% url 'checkout' %}" class="btn">Checkout</a>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h2>Checkout</h2>
+{% if items %}
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Qty</th>
+    <th>Subtotal</th>
+  </tr>
+  {% for entry in items %}
+  <tr>
+    <td>{{ entry.item.name }}</td>
+    <td>{{ entry.qty }}</td>
+    <td>₹{{ entry.subtotal }}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <td colspan="2"><strong>Total:</strong></td>
+    <td><strong>₹{{ total }}</strong></td>
+  </tr>
+</table>
+
+<form method="POST">
+  {% csrf_token %}
+  <p>Scan the QR code below to pay:</p>
+  <!-- Placeholder for QR Code image -->
+  <img src="{% static 'shop/qrcode-placeholder.png' %}" alt="QR Code" style="width:200px;" />
+  <input type="hidden" name="total" value="{{ total }}">
+  <button type="submit" class="btn">Confirm Payment</button>
+</form>
+
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

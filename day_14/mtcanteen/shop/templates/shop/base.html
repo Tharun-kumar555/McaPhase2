@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mother Theresa Canteen</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'css/scripts.js' %}"></script>
+
+</head>
+<body>
+<div >
+     
+    <div id="nave">
+    <img src="{% static "img\theresa.jpg"  %}" alt="" class="im">
+    <div id="nav">
+       Mother Theresa Institute Canteen
+    </div></div>
+    <nav>
+        <ul class="navbar">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Bakery ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'category' 'bakery' %}">All Bakery Items</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Mess ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'category' 'mess_breakfast' %}">Breakfast</a></li>
+                    <li><a href="{% url 'category' 'mess_lunch' %}">Lunch</a></li>
+                    <li><a href="{% url 'category' 'mess_dinner' %}">Dinner</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Canteen ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'category' 'canteen_breakfast' %}">Breakfast</a></li>
+                    <li><a href="{% url 'category' 'canteen_lunch' %}">Lunch</a></li>
+                    <li><a href="{% url 'category' 'canteen_dinner' %}">Dinner</a></li>
+                </ul>
+            </li>
+            <li class="cart-button"><a href="{% url 'cart' %}">🛒 Cart</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{% static 'shop/scripts.js' %}"></script>
+</body>
+</html>

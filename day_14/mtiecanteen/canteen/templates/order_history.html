@@ -1,0 +1,16 @@
+{% extends 'master.html' %}
+{% block content %}
+<h2>Your Orders</h2>
+{% for order in orders %}
+    <div>
+        <h3>Order #{{ order.id }} - {{ order.created_at }}</h3>
+        <ul>
+        {% for product in order.products.all %}
+            
+            <li>{{ product.name }} - ₹{{ product.price }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+<a href="{% url 'product_list' %}">Back to products</a>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .heading h1 { 
+            text-align: center;
+            }
+        .heading p{
+            text-align: left;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: center; font-size: 15px; }
+        th { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>Mother Theresa Institutions Canteen Bill</h1>
+        <p>Customer: {{ user.username }}</p>
+        <p>Date: {% now "Y-m-d H:i" %}</p>
+        <p>Bill Number: {{ bill_number }}</p>
+    </div>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price per unit</th>
+            <th>Subtotal</th>
+        </tr>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>Rs. {{ item.product.price }}</td>
+            <td>Rs. {{ item.item_total }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3" style="text-align: right;">Total: </td>
+            <td><strong>Rs. {{ total_price|default:"0.00" }}</strong></td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Scan to Pay</h3>
+    {% if qr_code %}
+        <img src="data:image/png;base64,{{ qr_code }}" alt="UPI QR Code" style="width:150px;height:150px;">
+    {% endif %}
+
+</body>
+</html>

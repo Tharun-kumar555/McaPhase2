@@ -1,0 +1,242 @@
+{% extends 'master.html' %}
+{% block styles %}
+    <style>
+        h2 {
+            margin: 8px;
+        }
+
+        img {
+            width: 120px;
+            height: 80px;
+        }
+
+        table {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
+            border: 1px solid #555;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        tfoot td {
+            font-weight: bold;
+            border: none;
+        }
+
+        .cartstyle {
+            max-width: 600px;
+            margin: auto;
+        }
+        button {
+            margin: 12px;
+            margin-bottom: 0;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #ff4d4d;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d11a2a;
+        }
+        
+        .bill-summary {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+
+        .bill-summary table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bill-summary th, .bill-summary td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .bill-summary th {
+            background-color: #f0f0f0;
+        }
+
+        .action-buttons {
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .action-buttons button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #2874f0;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .action-buttons button:hover {
+            background-color: #1857c3;
+        }
+        .nav-buttons {
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #2874f0;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            background-color: #1857c3;
+        }
+
+        input[type="number"] {
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        button {
+            margin-left: 4px;
+        }
+        .qr-section {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #fafafa;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            margin: 10px 0;
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+<h2>Your Cart</h2>
+    <div class="cartstyle">
+        <table>
+            <colgroup>
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+            </colgroup>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Image</th>
+                <th>Quantity</th>
+                <th>Product price</th>
+                <th>Remove/Update</th>
+            </tr>
+
+            {% for item in cart_items %}
+            <tr>
+                <td><h5>{{ item.product.name }}</h5></td>
+                <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"></td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                    ₹{{ item.product.price }} x {{ item.quantity }} = ₹{{ item.item_total }}
+                </td>
+                <td>
+                    <form method="post" action="{% url 'update_cart_quantity' item.product.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width:50px;">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form method="post" action="{% url 'remove_from_cart' item.product.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>₹{{ total_price|default:"0.00" }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <h3>Bill Summary</h3>
+        <div class="bill-summary">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price per unit</th>
+                    <th>Subtotal</th>
+                </tr>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.product.price }}</td>
+                    <td>₹{{ item.item_total }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3" style="text-align: right;">Total:</td>
+                    <td><strong>₹{{ total_price|default:"0.00" }}</strong></td>
+                </tr>
+            </table>
+        </div>
+       {% if qr_code %}
+            <div class="qr-section">
+                <h3>Scan to Pay (UPI)</h3>
+                <img src="data:image/png;base64,{{ qr_code }}" alt="UPI QR Code" />
+                <p>Pay ₹{{ total_price }} to Mother Theresa Institutions Canteen</p>
+            </div>
+        {% endif %}
+
+
+
+        <div class="action-buttons">
+            {% if request.user.is_authenticated %}
+                <button onclick="window.print()"> Print Bill</button>
+                <a href="{% url 'download_bill_pdf' %}" class="nav-btn"> Download Bill (PDF)</a>
+            {% else %}
+                <script>alert('Please login in to download your bill or print your bill!...')</script>
+            {% endif %}
+        </div>
+
+        <div class="nav-buttons">
+            <a class="nav-btn" href="{% url 'place_order' %}"> Place Order</a>
+            <a class="nav-btn" href="{% url 'product_list' %}">🛒 Continue Shopping</a>
+        </div>
+
+{% endblock %}

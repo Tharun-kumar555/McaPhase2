@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h2>{{ cat_label }}</h2>
+
+<div class="item-grid">
+  {% for item in items %}
+    <div class="item-card">
+      {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+      {% else %}
+        <img src="{% static 'img/' %}" alt="No Image" />
+      {% endif %}
+      <h3><a href="{% url 'item_detail' item.id %}">{{ item.name }}</a></h3>
+      <p>₹{{ item.price }}</p>
+      <a href="{% url 'add_to_cart' item.id %}" class="btn">Add to Cart</a>
+    </div>
+  {% empty %}
+    <p>No items found in this category.</p>
+  {% endfor %}
+</div>
+{% endblock %}

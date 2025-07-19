@@ -1,0 +1,28 @@
+{% extends 'master.html' %}
+{% block styles %}
+    <style>
+        .homepage{
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            height: auto;
+            justify-content: space-between;
+        }
+        button{
+            padding: 8px;
+            margin: 16px;
+        }
+        a{
+            text-decoration: none;
+            font-weight: 400;
+            color: black;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="homepage">
+    <a href="{% url 'product_list' %}"><img src="{% static 'img/bakery_image.avif' %}"></a>
+    <button><a href="{% url 'b_product_list' %}">Go to Bakery</a></button>
+</div>
+{% endblock %}

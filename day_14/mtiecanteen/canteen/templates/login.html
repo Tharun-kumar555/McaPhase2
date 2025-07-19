@@ -1,0 +1,166 @@
+{% extends 'master.html' %}
+{% block styles %}
+<style>
+    .container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color:rgba(199, 153, 97, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    height: 350px;
+    overflow-y: hidden;
+    /* overflow-x: hidden; */
+    box-shadow: -2px 2px 2px 3px rgb(191, 216, 218);
+    border-radius: 12px;
+}
+
+#user{  
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 12px;
+}
+
+.username{
+    padding-bottom: 8px;
+}
+
+h2{
+    font-family: Geneva, Tahoma, sans-serif;
+    margin-bottom: 15px;
+}
+
+#username{
+    /* padding: 12px; */
+    padding-left:8px;
+    padding-right: 54px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    border: none;
+    font-size: 15px;
+}
+
+#pwd{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 12px;
+}
+
+#password{
+    padding-left:8px;
+    padding-right: 54px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    border:none;
+    font-size: 15px;
+}
+
+.pass{
+    padding-bottom: 8px
+}
+
+#username:focus{
+    outline: none;
+    box-shadow: -2px 8px 8px rgb(191, 216, 218);
+}
+#password:focus{
+    outline: none;
+    box-shadow: -2px 8px 8px rgb(191, 216, 218);
+}
+
+#chkbox{
+    padding-top:8px;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+
+#foot{
+    display:flex;
+    justify-content: space-between;
+}
+
+#login{
+    padding: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+    outline: none;
+    border: 0.5px solid black;
+    background-color: rgb(68, 144, 221);
+    font-weight: 800;
+    color: white;
+    box-shadow: 4px 4px 4px rgba(62, 229, 229, 0.5);
+}
+
+#signup{
+    padding: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    outline: none;
+    /* border:none; */
+    border: 0.5px solid black;
+    background-color: rgb(68, 144, 221);
+    font-weight: 400;
+    color: white;
+    box-shadow: 4px 4px 4px rgba(62, 229, 229, 0.5);
+    text-decoration: none;
+}
+
+#login:hover{
+    background-color: rgb(20, 93, 166);
+}
+</style>
+{% endblock %}
+{% block content %}
+<!-- <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<a href="{% url 'signup' %}">Sign up</a> -->
+
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <script>
+                    alert(`{{ form.non_field_errors|striptags|escapejs }}`);
+                </script>
+            {% endif %}
+
+            <div id="user">
+                <label for="username" class="username">Username </label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div id="pwd">
+                <label for="password" class="pass">Password </label>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <div id="chkbox">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me </label>
+            </div>
+            <div id="foot">
+                <button type="submit" id="login">Login</button>
+                <a href="{% url 'signup' %}" id="signup">Sign up</a>  
+            </div>
+            <div class="forgot">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

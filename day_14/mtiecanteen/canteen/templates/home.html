@@ -1,0 +1,23 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block styles %}
+    <style>
+        .homepage{
+            display: flex;
+            flex-direction: row;
+            width: 600px;
+            height: auto;
+            justify-content: space-between;
+        }
+        a{
+            margin: 8px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="homepage">
+   
+    <a href="{% url 'product_list' %}"><img width="300px" height="180px" src="{% static 'img/canteen_1.jpg' %}"><p>Go to canteen</p></a>
+</div>
+{% endblock %}
