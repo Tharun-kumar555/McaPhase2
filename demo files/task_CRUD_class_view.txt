@@ -1,0 +1,240 @@
+Task: CRUD operation into Book Table using class based view
+
+Step 1: Set Up Your Django Project
+Make sure you have Django installed. If not, you can install it using pip:
+
+pip install django
+
+Create a new Django project: django-admin startproject myproject
+
+Navigate into your project directory: cd myproject
+
+Step 2: Create a Django App : python manage.py startapp myapp
+In Django, functionality is organized into apps. Create a new app within your project.
+
+Step 3: Define Models
+Open myapp/models.py and define your data models. 
+# myapp/models.py
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=50)
+    publication_date = models.DateField()
+
+    def __str__(self):
+        return self.title
+
+Step 4: Register Models to Admin
+Open myapp/admin.py and register your data models. 
+# myapp/admin.py
+from django.contrib import admin
+from .models import Book
+admin.site.register(Book)
+
+Step 5: Set Up SQLite3 Database# myproject/settings.py
+By default, Django uses SQLite3 as its database. 
+Ensure your database is set up correctly in settings.py for oracle/mysql/postgrey/ms-sqlserver
+
+Step 6: Register youy app to your project.
+# myproject/settings.py
+INSTALLED_APPS = [
+    'myapp',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+Step 7: Migrate Your Database to create Database Tables
+Run migrations to create database tables for your models:
+This will create the necessary database tables (Employee ) 
+
+python manage.py makemigrations myapp
+python manage.py migrate
+
+Step 8: Create SuperUser: python manage.py createsuperuser
+UserName: test
+Email: a@b.com
+Password: 123
+Confirm Password: 123
+Press "y" to ignore password validation
+
+Step 9: Create a new python file forms.py in your app.
+# myapp/forms.py
+
+
+Step 10: Write your business logics as class in Views 
+Define views in myapp/views.py for handling CRUD operations. 
+# myapp/views.py
+
+from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
+from .models import Book
+
+class BookCreateView(CreateView):
+    model = Book
+    fields = ['title', 'author', 'publication_date']
+    template_name = 'book_form.html'  # Optional: specify custom template
+    success_url = reverse_lazy('book_list')  # URL to redirect to after successful form submission
+
+class BookListView(ListView):
+    model = Book
+    context_object_name = 'books'  # Optional: specify the context variable name in templates
+    template_name = 'book_list.html'  # Optional: specify custom template
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = ['title', 'author', 'publication_date']
+    template_name = 'book_form.html'  # Optional: specify custom template
+    success_url = reverse_lazy('book_list')  # URL to redirect to after successful form submission
+
+class BookDeleteView(DeleteView):
+    model = Book
+    template_name = 'book_confirm_delete.html'  # Optional: specify custom template
+    success_url = reverse_lazy('book_list')  # URL to redirect to after successful deletion
+
+
+Step 11: Write HTML code in master Templates to be displayed on every page.
+#myapp/templates/master.html:
+<html>
+<head><title>
+{% block title %}
+
+{% endblock %}
+</title></head>
+<body bgcolor="goldenrod"> 
+<h1 align="center"> Welcome to Our College</h1>
+{% block content %}
+
+{% endblock %}
+<p>Author:Praveen Choudhary</p>
+<p>praveen.nsic@gmail.com</p>
+</body>
+</html>
+
+12: Create  HTML templates . 
+Write HTML code in book_form.html Templates
+You can now use  Django  templates to do insert/update   operation  on Book.
+(You have to create folder 'templates' if it does not exists in your app
+myapp/templates/book_form.html
+<!-- book_form.html -->
+{%   extends  "master.html"  %}
+{% block title %}
+{% if form.instance.pk %}Update{% else %}Create{% endif %} Book
+{% endblock %}
+
+{%  block content  %}
+    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Book</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
+
+
+13: Write HTML code in book_list.html Templates
+You can now use  Django  templates to  view objects in Book.
+Create HTML templates for  viewing data/object in Book. 
+myapp/templates/book_list.html:
+<!-- book_list.html -->
+{% extends "master.html" %}
+{% block title %}Book List{% endblock %}
+{% block content %}
+<h1>Book List</h1>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.publication_date }}</td>
+            <td>
+                <a href="{% url 'book_update' book.id %}">Edit</a> |
+                <a href="{% url 'book_delete' book.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No books found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'book_create' %}">Add New Book</a>
+{% endblock %}
+
+14: Write HTML code in book_confirm_delete.html Templates
+You can now use  Django  templates to  delete objects in Employee.
+Create HTML templates for  deleting data/object in Employee. 
+myapp/templates/book_confirm_delete.html:
+<!-- book_confirm_delete.html -->
+{%   extends  "master.html"  %}
+{% block title %}Confirm Delete{% endblock %}
+{%  block content  %}
+ <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>  
+ {% endblock %}
+
+Step 15: Define URLs
+15.1	Map URLs to views in myapp/urls.py:
+(You need to create urls.py in your app )
+# myapp/urls.py
+from django.urls import path
+from .views import BookCreateView, BookListView, 
+from .views import BookUpdateView, BookDeleteView
+urlpatterns = [
+    path('', BookListView.as_view(), name='book_list'),
+    path('create/', BookCreateView.as_view(), name='book_create'),
+    path('update/<int:pk>/', BookUpdateView.as_view(), name='book_update'),
+    path('delete/<int:pk>/', BookDeleteView.as_view(), name='book_delete'),
+]
+
+15.2	Include these URLs in your project's urls.py:
+# myproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+
+Step 16: Run Your Django Development Server
+Finally, start the Django development server and navigate to 
+python manage.py runserver
+navigate to http://127.0.0.1:8000/create/
+in your web browser and insert data for Book 
+navigate to http://localhost:8000/  
+in your web browser to view/display data of Book 
+navigate to http://127.0.0.1:8000/update/1/
+in your web browser to update Book data for id=1
+
+navigate to http://127.0.0.1:8000/create/
+Sample Data for Book
+Title	Author		Publication Date    #Autogenerated Id
+Java 	Praveen Choudhary     2023-07-01            #id=1
+DBMS 	Chandrasekhar Reddy 2021-06-21            #id=2
+Python	Murali Mohan         	2024-07-17            #id=3
+C++	Ganesh Reddy             2021-06-21            #id=4
+
+
+

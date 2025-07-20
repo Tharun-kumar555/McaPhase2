@@ -1,0 +1,217 @@
+Project Name: student_project
+App Name: students
+
+
+Django project code for managing a Student table (rollno, name, marks) using:
+
+✅ Function-Based Views (FBV)
+
+✅ Custom HTML Forms (no Django ModelForm)
+
+✅ All business logic in views.py
+
+✅ Project Structure
+
+student_project/
+│
+├── student_project/
+│   └── settings.py, urls.py, etc.
+│
+├── students/
+│   ├── templates/
+│   │   ├── list.html
+│   │   ├── add.html
+│   │   ├── edit.html
+│   │   └── delete.html
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│
+└── manage.py
+
+💡 Step-by-Step Code
+
+📁 Step 1: Create Django Project and App
+
+django-admin startproject student_project
+cd student_project
+python manage.py startapp students
+
+⚙️ Step 2: settings.py
+In student_project/settings.py, add 'students' to INSTALLED_APPS:
+
+
+INSTALLED_APPS = [
+    ...
+    'students',
+]
+
+🧩 Step 3: models.py
+
+# students/models.py
+from django.db import models
+
+class Student(models.Model):
+    rollno = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    marks = models.FloatField()
+
+    def __str__(self):
+        return f"{self.rollno} - {self.name}"
+
+🔁 Step 4: Migrate
+
+python manage.py makemigrations
+python manage.py migrate
+
+🌐 Step 5: Main URL Configuration
+
+# student_project/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('students/', include('students.urls')),
+]
+
+🌍 Step 6: App URL Configuration
+
+
+# students/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('list_students/', views.list_students, name='list_students'),
+    path('add/', views.add_student, name='add_student'),
+    path('edit/<int:rollno>/', views.edit_student, name='edit_student'),
+    path('delete/<int:rollno>/', views.delete_student, name='delete_student'),
+]
+
+🔧 Step 7: Views (FBV with HTML Forms)
+
+# students/views.py
+from django.shortcuts import render, redirect
+from .models import Student
+
+def list_students(request):
+    students = Student.objects.all()
+    return render(request, 'list.html', {'students': students})
+
+def add_student(request):
+    if request.method == 'POST':
+        rollno = request.POST['rollno']
+        name = request.POST['name']
+        marks = request.POST['marks']
+        Student.objects.create(rollno=rollno, name=name, marks=marks)
+        return redirect('list_students')
+    return render(request, 'add.html')
+
+def edit_student(request, rollno):
+    student = Student.objects.get(rollno=rollno)
+    if request.method == 'POST':
+        student.name = request.POST['name']
+        student.marks = request.POST['marks']
+        student.save()
+        return redirect('list_students')
+    return render(request, 'edit.html', {'student': student})
+
+def delete_student(request, rollno):
+    student = Student.objects.get(rollno=rollno)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('list_students')
+    return render(request, 'students/delete.html', {'student': student})
+
+
+Step 8: Templates
+students/templates/list.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Student List</title></head>
+<body>
+    <h1>Student Records</h1>
+    <a href="{% url 'add_student' %}">Add New Student</a><br><br>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Roll No</th><th>Name</th><th>Marks</th><th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.rollno }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.marks }}</td>
+            <td>
+                <a href="{% url 'edit_student' student.rollno %}">Edit</a> |
+                <a href="{% url 'delete_student' student.rollno %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+students/templates/add.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Add Student</title></head>
+<body>
+    <h2>Add New Student</h2>
+    <form method="post">
+        {% csrf_token %}
+        Roll No: <input type="number" name="rollno"><br><br>
+        Name: <input type="text" name="name"><br><br>
+        Marks: <input type="text" name="marks"><br><br>
+        <input type="submit" value="Add Student">
+        <a href="{% url 'list_students' %}">Cancel</a>
+    </form>
+</body>
+</html>
+
+
+students/templates/edit.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Edit Student</title></head>
+<body>
+    <h2>Edit Student - {{ student.rollno }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        Name: <input type="text" name="name" value="{{ student.name }}"><br><br>
+        Marks: <input type="text" name="marks" value="{{ student.marks }}"><br><br>
+        <input type="submit" value="Update Student">
+        <a href="{% url 'list_students' %}">Cancel</a>
+    </form>
+</body>
+</html>
+
+
+students/templates/delete.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Delete Student</title></head>
+<body>
+    <h2>Are you sure you want to delete {{ student.name }}?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Delete">
+        <a href="{% url 'list_students' %}">Cancel</a>
+    </form>
+</body>
+</html>
+
+▶️ Final Step: Run the Server
+
+python manage.py runserver
+
+✅ Features Summary
+Function	URL
+List Students	/
+Add Student	/add/
+Edit Student	/edit/<rollno>/
+Delete Student	/delete/<rollno>/

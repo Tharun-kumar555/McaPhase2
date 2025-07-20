@@ -1,0 +1,202 @@
+Task: Insert operation into Employee Table
+
+Step 1: Set Up Your Django Project
+Make sure you have Django installed. If not, you can install it using pip:
+
+pip install django
+
+Create a new Django project: django-admin startproject myproject
+
+Navigate into your project directory: cd myproject
+
+Step 2: Create a Django App : python manage.py startapp myapp
+In Django, functionality is organized into apps. Create a new app within your project.
+
+Step 3: Define Models
+Open myapp/models.py and define your data models. 
+# myapp/models.py
+from django.db import models
+class EmployeeModel(models.Model):  
+    first_name = models.CharField(max_length=30)  
+    last_name = models.CharField(max_length=30)  
+    mobile = models.CharField(max_length=10, unique=True)  
+    email = models.EmailField()  
+  
+    def __str__(self):  
+        return (self.first_name+' '+ self.last_name)
+
+Step 4: Register Models to Admin
+Open myapp/admin.py and register your data models. 
+# myapp/admin.py
+from django.contrib import admin
+from .models import EmployeeModel
+admin.site.register(EmployeeModel)
+
+Step 5: Set Up SQLite3 Database# myproject/settings.py
+By default, Django uses SQLite3 as its database. 
+Ensure your database is set up correctly in settings.py for oracle/mysql/postgrey/ms-sqlserver
+
+Step 6: Register youy app to your project.
+# myproject/settings.py
+INSTALLED_APPS = [
+    'myapp',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+Step 7: Migrate Your Database to create Database Tables
+Run migrations to create database tables for your models:
+This will create the necessary database tables (Employee ) 
+
+python manage.py makemigrations myapp
+python manage.py migrate
+
+Step 8: Create SuperUser: python manage.py createsuperuser
+UserName: test
+Email: a@b.com
+Password: 123
+Confirm Password: 123
+Press "y" to ignore password validation
+
+Step 9: Create a new python file forms.py in your app.
+# myapp/forms.py
+from django.forms import fields  
+from .models import EmployeeModel  
+from django import forms  
+class EmployeeForm(forms.ModelForm):  
+    class Meta:  
+        model = EmployeeModel  # To specify the model to be used to create form
+        fields = '__all__'  # It includes all the fields of model
+
+Step 10: Write your business logics as function in Views 
+Define views in myapp/views.py for handling data insert & view operations. 
+# myapp/views.py
+from django.shortcuts import render
+from django.http import HttpResponse 
+from .models import EmployeeModel  
+from .forms import EmployeeForm
+from django.template import loader
+#display form & save data  typed in form 
+def insert_employee(request):
+    context ={}# dictionary for initial data with field names as keys
+    ob_form = EmployeeForm(request.POST or None)
+    if ob_form.is_valid():
+        ob_form.save()
+        return HttpResponse("Data Saved")
+    context['form']= ob_form
+    return render(request, "insert_employee.html", context)  
+
+#view employee data
+def view_employee(request):
+    ob=EmployeeModel.objects.all().values()
+    context={
+        'data':ob
+        }
+    temp=loader.get_template('view_employee.html')
+    return HttpResponse(temp.render(context,request))
+
+Step 11: Write HTML code in master Templates to be displayed on every page.
+#myapp/templates/master.html:
+<html>
+<body bgcolor="goldenrod"> 
+<h1 align="center"> Welcome to Mother Theresa College</h1>
+ 
+{% block content %}
+
+{% endblock %}
+<p>Author:Ganesh</p>
+</body>
+</html>
+
+12: Write HTML code in insert_employee Templates
+You can now use  Django  templates to insert   objects in Employee.
+Create HTML templates for inserting  data/object in Employee. 
+(You have to create folder 'templates' if it does not exists in your app
+myapp/templates/insert_employee.html:
+{%   extends  "master.html"  %}
+{%  block content  %}
+<form method="POST"   action="{% url 'insert_employee' %}" >
+    {% csrf_token %}<!-- Security token -->
+    {{ form.as_p }}<!-- Using the formset -->
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+13: Write HTML code in view_employee Templates
+You can now use  Django  templates to  view objects in Employee.
+Create HTML templates for  viewing data/object in Employee. 
+myapp/templates/view_employee.html:
+{%   extends  "master.html"  %}
+{%  block content  %}
+<style>
+   table{        margin-top: 100px;         margin-left: 250px; }
+ </style>
+<h1>Welcome To Employee  Data</h1>
+<table border="1">
+<tr style="font-size: 20px;">
+<th>Id</th>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Mobile</th>
+<th>Email</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+{%  for  x  in  data  %}
+<tr style="font-size: 16px;">
+<td>{{x.id}}</td>
+<td>{{x.first_name}}</td>
+<td>{{x.last_name}}</td>
+<td>{{x.mobile}}</td>
+<td>{{x.email}}</td>
+<td> Edit </td>
+<td>Delete</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+</form>
+ {% endblock %}
+
+Step 14: Define URLs
+Map URLs to views in myapp/urls.py:
+(You need to create urls.py in your app )
+# myapp/urls.py
+from django.urls import path
+from . import views
+urlpatterns = [
+   path('insert_employee/',views.insert_employee, name='insert_employee'),
+   path('view_employee/', views.view_employee,  name = 'view_employee'),
+# other paths as needed
+]
+
+Include these URLs in your project's urls.py:
+# myproject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+
+Step 13: Run Your Django Development Server
+Finally, start the Django development server and navigate to 
+python manage.py runserver
+http://localhost:8000/insert_employee/  
+in your web browser and insert data for Employee 
+and
+navigate to 
+http://localhost:8000/view_employee/  
+Sample Data for Employee 
+FirstName	         LastName    Mobile	   Email		           #Autogenerated Id
+Praveen	         Choudhary   9971403971 praveen.nsic@gmail.com     #id=1
+Chandrasekhar    Reddy         7982164613 chandrasekhar@gmail.com  #id=2
+Murali 	         Mohan         9876543211 mm@gmail.com                 #id=3
+Ganesh	         Reddy          9781234565 ganesh@gmail.com           #id=4
+
+
+

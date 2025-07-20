@@ -1,0 +1,116 @@
+Create a Django project where:
+
+You type your name in an input box
+
+JavaScript updates a greeting below the input
+
+Static files (like JS) are inside the app's own folder
+
+Step-by-Step Code
+Step 1: Create Django Project and App
+
+django-admin startproject jsdemo
+cd jsdemo
+python manage.py startapp core
+
+Step 2: Register the App
+Edit jsdemo/settings.py:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'core',  # add this
+]
+
+
+Step 3: Create View
+In core/views.py:
+
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+
+Step 4a: Set Up URL Routing
+Edit jsdemo/urls.py:
+
+
+from django.contrib import admin
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('core/', include('core.urls')),
+]
+Step 4b: Set Up URL Routing
+Create  core/urls.py:
+
+
+from django.urls import path
+from . import views
+urlpatterns = [
+     path('index/', views.index,name='index'),
+]
+
+Step 5: Create Template Folder and File
+Create folder and file:
+
+
+core/templates/index.html
+index.html
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript in Django</title>
+     <script src="{% static 'js/script.js' %}"> </script>
+</head>
+<body>
+    <h1>Welcome!</h1>
+
+    <label for="nameInput">Enter your name:</label>
+    <input type="text" id="nameInput" oninput="showGreeting()">
+
+    <p id="greeting">Hello!</p>
+</body>
+</html>
+Step 6: Create App-Level Static Folder and JS File
+Create file:
+
+
+core/static/js/script.js
+
+script.js
+
+function showGreeting() {
+    var name = document.getElementById("nameInput").value;
+    var greeting = "Hello, " + name + "!";
+    document.getElementById("greeting").innerText = greeting;
+}
+Step 7: Run the Server
+
+python manage.py runserver
+Visit http://127.0.0.1:8000
+
+Final Folder Structure
+
+jsdemo/
+├── core/
+│   ├── static/
+│   │   └── js/
+│   │       └── script.js
+│   ├── templates/
+│   │   └── index.html
+│   │      
+│   ├── views.py
+│   └── ...
+├── jsdemo/
+│   ├── urls.py
+│   ├── settings.py
+├── manage.py

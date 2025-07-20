@@ -1,0 +1,100 @@
+Task: URL mapping and Templates tutorial-1
+
+Step 1: Set Up Your Django Project
+Make sure you have Django installed. If not, you can install it using pip:
+
+pip install django
+
+Create a new Django project: django-admin startproject project61
+
+
+Navigate into your project directory: cd project61
+
+Step 2: Create a Django App : python manage.py startapp app1
+Create a new app within your project.
+
+Step 3: Register youy app to your project.
+# project61/settings.py
+INSTALLED_APPS = [
+    'app1',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+Step 4: Migrate Your Database to create Database Tables
+Run migrations to create database tables for your models.
+This will create the necessary database tables .
+
+python manage.py makemigrations 
+python manage.py migrate
+
+Step 5: Create SuperUser: python manage.py createsuperuser
+UserName: test
+Email: a@b.com
+Password: 123
+Confirm Password: 123
+Press "y" to ignore password validation
+
+Step 6: Write your business logics as function in Views 
+Define one views in app1/views.py for handling html pages in templates. 
+# app1/views.py
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+
+def  home(request):
+    temp=loader.get_template('home.html')
+    return HttpResponse(temp.render())
+
+
+Step 7: Create a folder templates in app1 and
+Write HTML code in home template.
+<!-- app1/templates/home.html: -->
+<html>
+<body bgcolor="goldenrod"> 
+<h1 align="center"> Welcome to Annamacharya College</h1>
+ 
+
+<p>Author:crt</p>
+</body>
+</html>
+
+
+Step 8: Define URLs in your app  (app1)
+Map URLs to views in myapp/urls.py:
+(You need to create urls.py in your app )
+# app1/urls.py
+
+from django.urls import path
+from . import views
+urlpatterns = [
+   path('',views.home, name='home'),
+	]
+
+Step 9: Define URLs in your project  (project61)
+Include these URLs in your project's urls.py:
+# project61/urls.py
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('app1.urls')),
+]
+
+Step 10: Start Your Django Development Server on command prompt
+
+python manage.py runserver
+
+and navigate to home page
+http://localhost:8000 
+in your web browser
+
+Step 11:Navigate to admin page
+http://localhost:8000/admin/  
+from admin page , click on view site
+
+
